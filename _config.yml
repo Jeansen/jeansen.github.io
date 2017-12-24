@@ -5,22 +5,20 @@ url: "https://jeansen.github.io"
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap
-  avatar: assets/img/triangle.svg
+  title: Marcel's Blog
+  avatar: 
   favicon: assets/favicon.ico
   gravatar: 9fed1add40f1554fabc18ca6c339eebd
   description: "" # used by search engines
 
   # Header and footer text
-  header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> to disable this feature.</p>
-  header_text_feature_image: assets/img/pexels/triangular.jpeg
-  footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+  header_text: ""
+  header_text_feature_image: ""
+  footer_text: ""
 
   # Icons
-  rss: false
-  email_address: # Full email address, e.g. "sam@example.com"
+  rss: true
+  email_address: "jeansen@web.de"
   behance:
   bitbucket:
   dribbble:
@@ -71,7 +69,7 @@ theme_settings:
   post_navigation: false
 
 # PAGINATION
-paginate: 5
+paginate: 2
 paginate_path: "blog/page:num"
 
 # PORTFOLIO
@@ -86,6 +84,6 @@ highlighter: rouge
 sass:
   sass_dir: _sass
   style: :compressed
-plugins: [jekyll-paginate, jekyll-seo-tag]
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
 theme: type-on-strap # If using the theme as a jekyll theme gem
 exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png"]
