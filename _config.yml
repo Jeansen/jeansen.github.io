@@ -17,16 +17,8 @@ theme_settings:
   footer_text: ""
 
   # Icons
-<<<<<<< HEAD
   rss: true
-  email_address: "jeansen@web.de"
-||||||| merged common ancestors
-  rss: false
-  email_address: # Full email address, e.g. "sam@example.com"
-=======
-  rss: true
-  email_address: # Full email address, e.g. "sam@example.com"
->>>>>>> upstream/master
+  email_address: "mlautenb@gmail.com"
   behance:
   bitbucket:
   dribbble:
