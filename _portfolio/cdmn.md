@@ -2,7 +2,7 @@
 layout: post
 title: CDMN
 feature-img: "assets/img/portfolio/cdmn.svg"
-img: "assets/img/portfolio/cdmn.png"
+img: "assets/img/portfolio/cdmn.svg"
 date: 2017-12-21T19:00:25+01:00
 tags: [github, projects, cdmn, rxvt]
 ---
