@@ -18,7 +18,7 @@ theme_settings:
 
   # Icons
   rss: true
-  email_address: "mlautenb@gmail.com"
+  email_address:
   behance:
   bitbucket:
   dribbble:
