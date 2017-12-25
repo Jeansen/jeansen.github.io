@@ -6,14 +6,14 @@ url: "https://jeansen.github.io"
 theme_settings:
   # Meta
   title: Marcel's Blog
-  avatar: 
+  avatar: assets/img/marcel.jpg
   favicon: assets/favicon.ico
-  gravatar: 9fed1add40f1554fabc18ca6c339eebd
+  gravatar:
   description: "" # used by search engines
 
   # Header and footer text
-  header_text: ""
-  header_text_feature_image: ""
+  header_text: "Everything I want to share ..."
+  header_text_feature_image: "assets/img/header.jpg"
   footer_text: ""
 
   # Icons
@@ -44,7 +44,7 @@ theme_settings:
   # Scripts / Features 
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
-  katex: true # Enable if using math markup
+  katex: false # Enable if using math markup
   portfolio: true
   search: true
   tags: true
@@ -69,7 +69,7 @@ theme_settings:
   post_navigation: true
 
 # PAGINATION
-paginate: 2
+paginate: 5
 paginate_path: "blog/page:num"
 
 # PORTFOLIO
