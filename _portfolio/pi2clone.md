@@ -24,3 +24,5 @@ Anyway, after some trial and error hacking, I finally got a script that is able 
 - clone one system to another (live)
 
 The last point did work in the current implementation. But I will add support for lvm snapshots, too.
+
+Check out the [project page on github](https://github.com/Jeansen/pi2clone)!
