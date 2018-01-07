@@ -24,3 +24,5 @@ Finally, prepend the following line to `/etc/pam.d/gdm-password` to setup PAM fo
     
 Now, logout. If everything went OK, you will now first have to touch your U2F device and only then you will be able to type
 in the password for your user.
+
+Check out the [project page on github](https://github.com/Jeansen/pi2clone)!
