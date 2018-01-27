@@ -5,17 +5,29 @@ tags: [raspberry pi, linux]
 date: 2016-09-07T15:09:16+02:00
 ---
 
-A couple days ago I received my second Raspberry Pi. Since I had already tinkered with the configuration and installation of additional software packages I wanted to clone what I have to a new SD card and use this for my second Pi.
+A couple days ago I received my second Raspberry Pi. Since I had already tinkered with the configuration and installation 
+of additional software packages I wanted to clone what I have to a new SD card and use this for my second Pi.
 
-The only problem: The SD card I wanted to use for the second Pi is 16GB. The SD card in use by the first Pi is 32GB. In general this should not be a problem since I barely use 5GB from the available 32GB. Anyway, the question was: How do I get the system on the other Pi?
+The only problem: The SD card I wanted to use for the second Pi is 16GB. The SD card in use by the first Pi is 32GB. In 
+general this should not be a problem since I barely use 5GB from the available 32GB. Anyway, the question was: How do I 
+get the system on the other Pi?
 
-One way (which I did not try) could have been to simply create the necessary partitions on the new card, copy the contents from the 32GB card one partition at a time to the other SD card and enjoy the new system.
+One way (which I did not try) could have been to simply create the necessary partitions on the new card, copy the contents 
+from the 32GB card one partition at a time to the other SD card and enjoy the new system.
 
-Frankly, I feel more comfortable with having one file that I just _burn_ to the destination card without caring about partitions, files and whatever else.
+Frankly, I feel more comfortable with having one file that I just _burn_ to the destination card without caring about 
+partitions, files and whatever else.
 
-So, how do I get an image of a SD card that I can then use to create a clone? The next tool at hand to go with is `dd`. But `dd` is meant to do raw a copy, sector by sector, bit by bit! This would even be easier than before since I would just have to push everything from the source SD card into a file and then push this image file to a destination SD card. The only condition with this approach is: The destination card must be of the same or greater size than the source card! But in my the destination card is smaller than the source.
+So, how do I get an image of a SD card that I can then use to create a clone? The next tool at hand to go with is `dd`. 
+But `dd` is meant to do raw a copy, sector by sector, bit by bit! This would even be easier than before since I would just 
+have to push everything from the source SD card into a file and then push this image file to a destination SD card. The 
+only condition with this approach is: The destination card must be of the same or greater size than the source card! But 
+in my the destination card is smaller than the source.
 
-To work around this I could have used `gparted` to first shrink the partitions of the 32G SD card, run `dd` and then cut from the resulting image what I do not need. Again, I do not feel comfortable with altering the source just for the purpose of cloning or creating an _economical_ copy. But, there are some steps in this example that are useful for the final solution.
+To work around this I could have used `gparted` to first shrink the partitions of the 32G SD card, run `dd` and then cut 
+from the resulting image what I do not need. Again, I do not feel comfortable with altering the source just for the 
+purpose of cloning or creating an _economical_ copy. But, there are some steps in this example that are useful for the 
+final solution.
  
  
 # The solution!
@@ -65,7 +77,8 @@ From this you can see, that there is a new device `sdc` with two partitions moun
  
 ## Clone a SD card with dd
  
- Cloning the SD card is fairly easy with `dd`. But before I clone the SD card I will unmount the two partitions sdc1 and sdc1 to make sure nothing is blocked. After all, I do not need them mounted anyway!
+ Cloning the SD card is fairly easy with `dd`. But before I clone the SD card I will unmount the two partitions sdc1 and 
+ sdc1 to make sure nothing is blocked. After all, I do not need them mounted anyway!
   
     sudo umount /media/marcel/boot
     sudo umount /media/marcel/2f840c69-cecb-4b10-87e4-01b9d28c231c
@@ -74,7 +87,8 @@ From this you can see, that there is a new device `sdc` with two partitions moun
  
     sudo dd status=progress if=/dev/sdc of=~/pi_backup.img
     
- After some time I get a file `~/pi_backup.img` with a size of about 30G. Here is what it looks like in the console when this command finished on my system:
+ After some time I get a file `~/pi_backup.img` with a size of about 30G. Here is what it looks like in the console when 
+ this command finished on my system:
  
     62333952+0 records in
     62333952+0 records out
@@ -104,9 +118,12 @@ Which shows me:
 
     /home/marcel/pi_backup.img: DOS/MBR boot sector; partition 1 : ID=0xc, start-CHS (0x0,130,3), end-CHS (0x8,138,2), startsector 8192, 129024 sectors; partition 2 : ID=0x83, start-CHS (0x60,0,1), end-CHS (0x8f,3,16), startsector 137216, 62196736 sectors
 
-From this I am able to see that on the physical source I have two partitions. One starting at sector 8192, ending at sector 129024, being 129024 sectors in size and of type FAT32. A second partition starting at sector 137216, ending at sector 62333951, being 62196736 in size and of type Linux.
+From this I am able to see that on the physical source I have two partitions. One starting at sector 8192, ending at 
+sector 129024, being 129024 sectors in size and of type FAT32. A second partition starting at sector 137216, ending at 
+sector 62333951, being 62196736 in size and of type Linux.
 
-Comparing this to the output from `file -s ~/pi_backup.img` I can confirm, that start, end, size and type are all the same. Perfect, this clone is identical!
+Comparing this to the output from `file -s ~/pi_backup.img` I can confirm, that start, end, size and type are all the 
+same. Perfect, this clone is identical!
 
 To be on the safe side I unmounted and removed the USB stick with the source SD card.
 
@@ -137,7 +154,8 @@ To visialize what we have so far, here is a screen shot of what it looks like in
     ├─loop0p1     254:2    0    63M  0 part 
     └─loop0p2     254:3    0  29.7G  0 part 
 
-From this I one can see that the image file __pi_backup.img__ is now mounted to loop0 with the first partition mapped to loop0p1 and the second partition to loop0p2.
+From this I one can see that the image file __pi_backup.img__ is now mounted to loop0 with the first partition mapped to 
+loop0p1 and the second partition to loop0p2.
 
 To shrink the filesystem on the second partition I first have to check the filesystem with:
 
@@ -157,11 +175,13 @@ That is, the filesystem is now 1555124 * 4k in size, that is 6220496k which in t
 
 ## Shrink the partition
 
-Nex I want to shrink the partition to the size of the shrinked filesystem. For this, I first remove the mapping from `kpartx` with:
+Nex I want to shrink the partition to the size of the shrinked filesystem. For this, I first remove the mapping from 
+`kpartx` with:
 
     sudo kpartx -d /dev/loop0
     
-This removes the two partition mappings loop0p1 and loop0p2, but leaves the image available as loop0. Now I am able to use the power of `fdisk`:
+This removes the two partition mappings loop0p1 and loop0p2, but leaves the image available as loop0. Now I am able to 
+use the power of `fdisk`:
 
     sudo fdisk /dev/loop0
 
@@ -177,9 +197,14 @@ Typing `p` shows me the current available partitions on loop0:
     /dev/loop0p1        8192   137215   129024   63M  c W95 FAT32 (LBA)
     /dev/loop0p2      137216 62333951 62196736 29.7G 83 Linux
 
-Now, the partition on /dev/loop0p2 is still 29.7G big. To shrink it, I'll have to delete it and create a new partition. So, I type `d` to delete the second partition (default offered). From the list I got with `p` I know where the first partition ended and the second started. With this in mind I am able to create a new partition  with a smaller size. For this, I type `n` followd by `p` and accept the default for the partition number (default 2). 
+Now, the partition on /dev/loop0p2 is still 29.7G big. To shrink it, I'll have to delete it and create a new partition. 
+So, I type `d` to delete the second partition (default offered). From the list I got with `p` I know where the first 
+partition ended and the second started. With this in mind I am able to create a new partition  with a smaller size. For 
+this, I type `n` followd by `p` and accept the default for the partition number (default 2). 
 
-The first sector should be the same as before, that is 137216. The last sector is an estimate. From the math I did after shrinking I know that I need about 6G. To be on the save side, I add 1G more. Just to be sure! So, for the last sector wanted by `fdisk` I enter `+7G`.
+The first sector should be the same as before, that is 137216. The last sector is an estimate. From the math I did after 
+shrinking I know that I need about 6G. To be on the save side, I add 1G more. Just to be sure! So, for the last sector 
+wanted by `fdisk` I enter `+7G`.
 
 Now, `p` shows me:
 
@@ -195,9 +220,12 @@ The final step is to remove the loop device:
     
 ## Checkpoint
 
-At this point everything should look like [before we started](#setup). If `losetup` did not work, try `dmsetup remove /dev/loop0` and if that does not work, try the ultimate weapon: `dmsetup remove_all`. The last one should remove __all__ loop devices that you had.
+At this point everything should look like [before we started](#setup). If `losetup` did not work, try 
+`dmsetup remove /dev/loop0` and if that does not work, try the ultimate weapon: `dmsetup remove_all`. The last one should 
+remove __all__ loop devices that you had.
 
-To check that everything worked as expected, I will use `kpartx -a ~/pi_backup.img` one more time and show the result with `lsblk`:
+To check that everything worked as expected, I will use `kpartx -a ~/pi_backup.img` one more time and show the result 
+with `lsblk`:
 
     NAME          MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
     sda             8:0    0   128G  0 disk 
@@ -218,14 +246,16 @@ Again, to visualize the current state I present another screen shot.
 
 ![alt text](/assets/img/posts/2016-09-07/GParted_002.png "Logo Title Text 1")
 
-Great! The second partition is now 7G, instead of 29.7G. So, let's remove the mapping again and finally shrink the image file to get rid of the unused space!
+Great! The second partition is now 7G, instead of 29.7G. So, let's remove the mapping again and finally shrink the image 
+file to get rid of the unused space!
 
     sudo kpartx -d /dev/loop0
     sudo losetup -d /dev/loop0
 
 ## Shrinking the image file
 
-Knowing the Image is about 30G in size with one partition of 63M and another of 7G, I estimate that keeping 8G in total should be save. So, I cut off 22G:
+Knowing the Image is about 30G in size with one partition of 63M and another of 7G, I estimate that keeping 8G in total 
+should be save. So, I cut off 22G:
  
     truncate -s -22G ~/pi_backup.img    
     
@@ -236,8 +266,11 @@ Let's check again what the final image file now looks like in GParted.
 
 ## Move the image to a new SD card
 
-The final step is like the first step, just the other way around. That is, I plug in my USB stick with the new 16G SD card and call:
+The final step is like the first step, just the other way around. That is, I plug in my USB stick with the new 16G SD 
+card and call:
 
     sudo dd status=progress if=~/pi_backup.img of=/dev/sdc
     
-After `dd` finished, I have a cloned SD card that I can now insert into my second Pi. The rest is like one would do with any of the initial Pi images: After a first boot expand the filesystem with `raspi-config` to use all the space available on the SD card.
+After `dd` finished, I have a cloned SD card that I can now insert into my second Pi. The rest is like one would do with 
+any of the initial Pi images: After a first boot expand the filesystem with `raspi-config` to use all the space available 
+on the SD card.
