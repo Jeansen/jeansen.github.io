@@ -14,7 +14,7 @@ highlight completely (for the current file type).
 
 Finally, I found [this post on stackoverflow.com](https://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting).
 
-There, the author of the accepted answers states, that any version up to Vim 7.3.969 uses an older regex engine than 
+There, the author of the accepted answer states that any version up to Vim 7.3.969 uses an older regex engine than 
 e.g. VIM 7.4 or 8.0. 
 
 So, I followed the authors answer and added `set re=1` to my .vimrc file. This will set the regexp engine to the old
