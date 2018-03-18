@@ -51,7 +51,7 @@ So, with fdisk running I first type `n` for a new and follow it with `p` to crea
 ## 2. Backup your system
 To backup my data I wanted to make sure most of the attributes stay as they are. There are a lot of different tools that can do the job. Since I did not want to do a sector-by-sector cloning I decided to use tar. Here's how I created my backup file: 
 
-    tar -Scpf /mnt/backup/backup.tar --directory=/media/user/UUID/ --exclude=proc/* --exclude=dev/* --exclude=sys/* --atime-preserve --numeric-owner --xattrs .
+    tar -Scpf /mnt/backup/backup.tar --directory=/media/user/UUID/ --exclude=/proc/* --exclude=/dev/* --exclude=/sys/* --atime-preserve --numeric-owner --xattrs .
 
 - **-S** This option instructs tar to test each file for sparseness before attempting to archive it. If the file is found to be sparse it is treated specially, thus allowing to decrease the amount of space used by its image in the archive[^2].
 
