@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Logitech M570 - mapping extra buttons in Linux
+title: Logitech M570 - How to map extra buttons in Linux
 tags: [linux]
 date: 2018-03-30T13:21:32+02:00
 ---
