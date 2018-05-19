@@ -24,4 +24,4 @@ Finally I had to update the initramfs with 'update-initramfs -u'.
 
 And that's it!
 
-NOTE: Should you get some warnings of missing firmwares, [see my other post](2018-05-19-how-to-fix-possible-missing-firmware-warnings).
+NOTE: Should you get some warnings of missing firmwares, [see my other post](how-to-fix-possible-missing-firmware-warnings).
