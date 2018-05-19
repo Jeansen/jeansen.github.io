@@ -5,7 +5,7 @@ date: 2018-05-19T23:23:42+02:00
 tags: [Debian, Linux]
 ---
 
-While running 'update-initramfs -u' after [adding a module to initramfs](2018-05-19-how-to-add-kernel-modules.markdown)
+While running 'update-initramfs -u' after [adding a module to initramfs](2018-05-19-how-to-add-kernel-modules)
 I got the following warnings:
 
     W: Possible missing firmware /lib/firmware/i915/skl_dmc_ver1_27.bin for module i915
