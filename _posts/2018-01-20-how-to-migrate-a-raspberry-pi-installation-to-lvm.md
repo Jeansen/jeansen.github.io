@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Howto migrate a Raspberry Pi installation to LVM
+title: How to migrate a Raspberry Pi installation to LVM
 tags: [raspberry pi, linux]
 date: 2018-01-20T15:27:08+01:00
 ---
@@ -16,7 +16,7 @@ The migration process can be summarized as follows:
 
 ## Preconditions
 
-Before you begin, make sur the installation you want to migrate has the `lvm2` package installed. Otherwise you will not be
+Before you begin, make sure the installation you want to migrate has the `lvm2` package installed. Otherwise you will not be
 able to boot after the migration!
 
 ## Hardware Setup
@@ -42,7 +42,7 @@ __Please resist the urge to use `rpi-update` for kernel updates. This will break
 
 ## Backup
 
-By default, there are 2 partitions. One for `/boot` an the other for `/`. We we will not alter 'boot'. So we can leave 
+By default, there are 2 partitions. One for `/boot` and the other for `/`. We we will not alter 'boot'. So we can leave 
 it alone and backup the root partition `/` only. I will use [pi2clone](https://github.com/jeansen/pi2clone) for this purpose, 
 but any backup with tar will suffice.
 
@@ -136,4 +136,4 @@ In the same way, we have to change `/media/root/etc/fstab` for `/`. Here is an e
 
 That's it! Put this newly created SD card in your Raspberry Pi and see what will happen :-) 
     
-[^1]: After all, restoring the previous backupt would overwrite your current LVM setup!
+[^1]: After all, restoring the previous backup would overwrite your current LVM setup!
