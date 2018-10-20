@@ -67,8 +67,8 @@ Finally, I copied back the fstab file from before.
   
 Next, I installed the new firmware files.
 
-    wget -m -np https://people.freedesktop.org/~agd5f/radeon_ucode/vegam/
-    sudo cp people.freedesktop.org/~agd5f/radeon_ucode/vegam/*.bin /mnt/root_dest/lib/firmware/amdgpu
+    git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+    sudo cp linux-firmware/amdgpu/vegam_*.bin /mnt/root_dest/lib/firmware/amdgpu
   
 Then it was time to migrate the boot files. First I had to mount the destinations boot partition. Then I had to remove obsolete kernel files and copy over the new files.
 
