@@ -1,7 +1,7 @@
 ---
 layout: post
 title: bcrm
-feature-img: "assets/img/portfolio/pi2clone.svg"
+feature-img: "assets/img/portfolio/bcrm.svg"
 img: "assets/img/portfolio/bcrm.svg"
 date: 2018-11-1T20:08:11+01:00
 tags: [github, projects, bcrm, linux]
