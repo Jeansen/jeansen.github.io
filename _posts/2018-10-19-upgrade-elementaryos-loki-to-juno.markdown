@@ -7,9 +7,9 @@ tags: [linux, elementaryOS]
 
 The team behind elementaryOS released version 5.0, aka Juno. But it seems there is no official upgrade path. Everywhere I searched I was confronted with that it is not possible and I would have to do a fresh install. I was shocked. A Linux system I cannot upgrade?
 
-So, it is true there is no official upgrade path. At least, I did not find one. And there is no official tool that makes upgrading a one-click or one-command event. But under the hood elementaryOS is nothing more than Ubuntu with some additions and replacements, anyway. And as we all know Ubuntu is based on Debian which in turn __has__ a defined upgrade path. So why shouldn't the Debian upgrade path also work for all systems based on Debian?!
+So, it is true there is [no official upgrade path, yet](https://github.com/orgs/elementary/projects/20). But as we all know Ubuntu is based on Debian which in turn __has__ a defined upgrade path. So why shouldn't the Debian upgrade path also work for all systems based on Debian?! Well, yes and no. While my experience is that it works quite well, it might not be the best way. Maybe it would be a better idea to [use aptik](https://github.com/elementary/wingpanel-indicator-notifications/issues/57#issuecomment-437696278). But, if you are still interesed, read on!
 
-As it turns out, it does! And it's quite simple, actually. All you have to do is replace every occurrence of the term `xenial` with `bionic` in `/etc/apt/resources.list` and `/ect/apt/resources.list.d`. While your are on it you might also delete all those `*.save` files.
+All you have to do is replace every occurrence of the term `xenial` with `bionic` in `/etc/apt/resources.list` and `/ect/apt/resources.list.d`. While your are on it you might also delete all those `*.save` files.
 
 After that you simply do:
   
