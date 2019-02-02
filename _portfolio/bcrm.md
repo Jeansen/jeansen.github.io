@@ -20,6 +20,6 @@ wanted to have support for LVM.
 
 With the end of the year 2018 not that far away the "script' grew beyond my original expectations and is able to do a lot more than just creating a clone of a SD card for a raspberry pi.
 
-Therefore I decided to rename it from pi2clone to bcrm as in (Backup, Clone, Restore and More)
+Therefore I decided to rename it from bcrm to bcrm as in (Backup, Clone, Restore and More)
 
 Check out the [project page on github](https://github.com/Jeansen/bcrm)!

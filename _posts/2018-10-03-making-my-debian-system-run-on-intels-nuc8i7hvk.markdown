@@ -9,7 +9,7 @@ So, I finally decided to replace my old 5th generation NUC with a new one. And n
 
 # The two showstoppers
 
-So, I got the box, a new M.2 disk and 16 GB of DDR4 RAM modules. I cloned my current system over to the new disk using [my clone script](https://github.com/jeansen/pi2clone), installed the disk and RAM and fired up the box. Should have been that easy, right? Well, not exactly. Because of two reasons my system did not boot. 
+So, I got the box, a new M.2 disk and 16 GB of DDR4 RAM modules. I cloned my current system over to the new disk using [my clone script](https://github.com/jeansen/bcrm), installed the disk and RAM and fired up the box. Should have been that easy, right? Well, not exactly. Because of two reasons my system did not boot. 
 
 The first reason was that Intel decided with the first Bios Update since the introduction of the Skull Canyon to exterminate the option for a legacy boot. That is, there is no option to disable UEFI anymore. As a result, you'll have to have a disk setup for UEFI. I did not, so I had to migrate (which I will explain shortly).
 
@@ -22,7 +22,7 @@ So, I checked the `~/.local/share/xorg/Xorg.0.log` log and found something like 
   
 Now, I'll show in detail what I have done regarding the two issues above. Especially the migration to UEFI is one of many solutions. But one that worked for me :-)
 
-Instead of converting my current system (clone), I took another approach and installed a fresh and clean Debian. For the installation I chose LVM and to have everything in one partition (the default for new users). I [cloned](https://github.com/jeansen/pi2clone) my current system again, but to an external USB drive. After that I booted from the Debian Live CD, wiped the root partition of the fresh installation, copied over the root partition from the clone and reconfigured GRUB. Here are the steps:
+Instead of converting my current system (clone), I took another approach and installed a fresh and clean Debian. For the installation I chose LVM and to have everything in one partition (the default for new users). I [cloned](https://github.com/jeansen/bcrm) my current system again, but to an external USB drive. After that I booted from the Debian Live CD, wiped the root partition of the fresh installation, copied over the root partition from the clone and reconfigured GRUB. Here are the steps:
 
 Running from the Live CD, I first had to install support for LVM.
 

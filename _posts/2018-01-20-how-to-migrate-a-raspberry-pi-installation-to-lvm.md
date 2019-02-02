@@ -43,17 +43,17 @@ __Please resist the urge to use `rpi-update` for kernel updates. This will break
 ## Backup
 
 By default, there are 2 partitions. One for `/boot` and the other for `/`. We we will not alter 'boot'. So we can leave 
-it alone and backup the root partition `/` only. I will use [pi2clone](https://github.com/jeansen/pi2clone) for this purpose, 
+it alone and backup the root partition `/` only. I will use [bcrm](https://github.com/jeansen/bcrm) for this purpose, 
 but any backup with tar will suffice.
 
-With pi2clone it is as simple as providing the source disk and a destination folder. For this example we will
+With bcrm it is as simple as providing the source disk and a destination folder. For this example we will
 use `/tmp` as our workspace. So, let's get started and create a backup:
 
     cd /tmp
     mkdir /tmp/backup
-    git clone https://github.com/Jeansen/pi2clone.git 
-    cd pi2clone
-    ./pi2clone.sh -s /dev/sda -d /tmp/backup -i
+    git clone https://github.com/Jeansen/bcrm.git 
+    cd bcrm
+    ./bcrm.sh -s /dev/sda -d /tmp/backup -i
     
 ## Setup LVM
 
@@ -72,15 +72,15 @@ Finally, we can create one or more Logical Volumes (LV). In this example we will
     
 The commands 'pvs', 'vgs' and 'lvs' will give us a quick summary of what we have created. Let's see, what we have:
     
-    root@raspberrypi:/tmp/pi2clone# pvs
+    root@raspberrypi:/tmp/bcrm# pvs
       PV         VG   Fmt  Attr PSize  PFree
       /dev/sda2  vg00 lvm2 a--  14.79g    0 
     
-    root@raspberrypi:/tmp/pi2clone# vgs
+    root@raspberrypi:/tmp/bcrm# vgs
       VG   #PV #LV #SN Attr   VSize  VFree
       vg00   1   1   0 wz--n- 14.79g    0 
       
-    root@raspberrypi:/tmp/pi2clone# lvs
+    root@raspberrypi:/tmp/bcrm# lvs
       LV   VG   Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
       root vg00 -wi-a----- 14.79g 
       
