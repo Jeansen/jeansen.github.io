@@ -25,9 +25,14 @@ So, here is the inception of my solution that simply uses `sed` and `bash`.
     
     ramfile="$(mktemp -p /dev/shm/)"
     
-    tail -F -n +1 "$1" | sed -u 's#^[0-9]\+\(-[0-9]*\)*\s[0-9]*\(:[0-9]*\)*#\x1b[30;48;5;15m&\x1b[0m#; s#\bWARN#\x1b[30;48;5;226m&\x1b[0m#; s#\bERROR#\x1b[15;48;5;1m&\x1b[0m#; s#INFO#\x1b[96m&\x1b[0m#;' > "$ramfile" &
+    tail -F -n +1 "$1" | sed -u '
+      s#^[0-9]\+\(-[0-9]*\)*\s[0-9]*\(:[0-9]*\)*#\x1b[30;48;5;15m&\x1b[0m#;
+      s#\bWARN#\x1b[30;48;5;226m&\x1b[0m#;
+      s#\bERROR#\x1b[15;48;5;1m&\x1b[0m#;
+      s#INFO#\x1b[96m&\x1b[0m#;
+      ' > "$ramfile" &
+      
     C_PID=$!
-    
     
     sleep 0.1 #otherwise less might not show anything
     less -R -N "$ramfile"
