@@ -103,7 +103,7 @@ reveals multiple files:
 
 We need to extract the file that has `sda2`in its name:
 
-    tar xf /tmp/backup/*_sda2 -C /media/root
+    tar xf /tmp/backup/*_sda2* -C /media/root
     
 ## Adapt boot configuration
 
