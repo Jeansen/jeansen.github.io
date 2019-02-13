@@ -5,9 +5,7 @@ date: 2019-02-13T10:37:27+01:00
 tags: [linux, bash]
 ---
 
-## The problem
-
-For some days I had to read a lot of log files. For better visual filtering I did some research and found some promising tools. But after some fiddling around, none of them could fit my needs. Either they were buggy in some way, too limited or added too much overload. And in the end I needed something portable, anyway.
+For some days now I had to read a lot of log files. For better visual filtering I did some research and found some promising tools. But after some fiddling around, none of them could fit my needs. Either they were buggy in some way, too limited or added too much overload. And in the end I needed something portable, anyway.
 
 ## Possible solutions
 For instance, `lnav` is a very interesting tool. But I had a lot of problems with larger files. It happend too often that the application just crashed or "froze to death".
