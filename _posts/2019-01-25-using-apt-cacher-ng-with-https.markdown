@@ -34,6 +34,10 @@ To have apt-cacher-ng work with HTTPS I rewrote all entries in `/etc/apt/sources
 And just to be sure there should be a file /etc/apt/apt.conf.d/30autoproxy containing the following sting:
 
     Acquire::http::ProxyAutoDetect "/usr/share/squid-deb-proxy-client/apt-avahi-discover";
+    
+A manual entry without auto detection would be:
+
+    Acquire::http { Proxy "http://<server-ip-or-name>:3142"; }
 
 ## Conclusion
 
