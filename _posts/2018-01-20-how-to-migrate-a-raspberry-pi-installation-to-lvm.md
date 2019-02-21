@@ -133,6 +133,27 @@ In the same way, we have to change `/media/root/etc/fstab` for `/`. Here is an e
     proc            /proc           proc    defaults          0       0
     PARTUUID=36c26eb6-01  /boot           vfat    defaults          0       2
     /dev/mapper/vg00-root  /               ext4    defaults,noatime  0       1
+    
+## Be prepared for new kernels
+
+Finally, you'll have to make sure initramfs is rebuild whenever there are kernel updates. One options is to always 
+do this after any APT upgrade sequence (done automatically by `unattended-upgrades`).
+
+To have APT rebuild initramfs after every upgrade, you'll have to put the following line in `/etc/apt/apt.con.d/99initramfs`
+
+    DPkg::Post-Invoke {"mkinitramfs -o /boot/initramfs.gz"}
+    
+This should make sure `mkinitramfs` is called as the last instruction.
+
+If you do not have initramfs rebuild and you get a new kernel, then the new kernel will not be able to initiate LVM and
+mount your filesystems. You might see something similar to the following and be stuck in emergency mode:
+
+    WARNING: Failed to connect to lvmetad. Falling back to device scanning.
+    /dev/mapper/vg00-root: open failed: Permission denied
+    Failure to communicate with kernel device-mapper driver.
+    Incompatible libdevmapper 1.02.145 (2017-11-03) and kernel driver (unknown version).
+    
+## All done
 
 That's it! Put this newly created SD card in your Raspberry Pi and see what will happen :-) 
     
