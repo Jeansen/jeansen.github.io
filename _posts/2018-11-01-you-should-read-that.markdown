@@ -10,6 +10,7 @@ Sometimes I find something that I read once and come back later on but that I kn
 # Bash
 
 - [set -e does NOT do what people think it does](https://lists.gnu.org/archive/html/bug-bash/2017-03/msg00171.html) : Nice story that quite amusingly shows why `set -e` is more pain than gain.
+- [Wherefore Art, Thou?](https://www.linuxjournal.com/article/2070) : Larry Wall's view on Perl and other languages compared to different music genres.
 
 
 
