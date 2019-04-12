@@ -12,7 +12,7 @@ theme_settings:
   description: "" # used by search engines
 
   # Header and footer text
-  header_text: "Everything I want to share ..."
+  header_text: "Learn as if you were to live forever. (M. Gandhi)"
   header_text_feature_image: "assets/img/header.jpg"
   footer_text: ""
 
