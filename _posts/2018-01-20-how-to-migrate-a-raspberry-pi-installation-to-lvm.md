@@ -139,13 +139,13 @@ In the same way, we have to change `/media/root/etc/fstab` for `/`. Here is an e
 Finally, you'll have to make sure initramfs is rebuild whenever there are kernel updates. One options is to always 
 do this after any APT upgrade sequence (done automatically by `unattended-upgrades`).
 
-To have APT rebuild initramfs after every upgrade, you'll have to put the following line in `/etc/apt/apt.con.d/99initramfs`
+To have APT rebuild initramfs after every upgrade, you'll have to put the following line in `/etc/apt/apt.con.d/30initramfs`
 
     DPkg::Post-Invoke {"mkinitramfs -o /boot/initramfs.gz"}
     
-This should make sure `mkinitramfs` is called as the last instruction.
+You might have to change the number, but 30 in `30initramfs` should be fine. This way we make sure the `Post-Invoke` hook is present before other tools like `unattended-upgrades` which by default use 50 or greater numbers. Also note, that the name `initramfs` as part of the filename is my personal preference. Choose whatever name you like! 
 
-If you do not have initramfs rebuild and you get a new kernel, then the new kernel will not be able to initiate LVM and
+If you do not have initramfs rebuilt and you get a new kernel, then the new kernel will not be able to initiate LVM and
 mount your filesystems. You might see something similar to the following and be stuck in emergency mode:
 
     WARNING: Failed to connect to lvmetad. Falling back to device scanning.
