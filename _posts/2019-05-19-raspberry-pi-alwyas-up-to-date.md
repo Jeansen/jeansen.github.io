@@ -9,4 +9,4 @@ By now, I have more than one Raspberry Pi installed at home. Most of the time I 
 
 My solution for this on the Raspbarry Pi platform running Raspian is a simple combination of the two packages `needrestart` and `unattended-upgrades`. The former one will take care of all services that need to be restarted after any updates. The latter one will take care of automatic updates and upgrades (and restart the system, if necessary).
 
-Because I have all my systems [setup with LVM]({{ site.baseurl }}{% post_url 2018-01-20-how-to-migrate-a-raspberry-pi-installation-to-lvm %}), there was one catch: Whenever a new kernel was installed I also had to [be prepared for new kernels]({{ site.baseurl }}{% post_url 2018-01-20-how-to-migrate-a-raspberry-pi-installation-to-lvm#be-prepared-for-new-kernels %}).
+Because I have all my systems [setup with LVM]({{ site.baseurl }}{% post_url 2018-01-20-how-to-migrate-a-raspberry-pi-installation-to-lvm %}), there was one catch: Whenever a new kernel was installed I also had to
