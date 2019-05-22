@@ -6,9 +6,9 @@ tags: [raspberry pi, linux]
 ---
 
 
-So, a couple days ago I ordered my first sensor for measuring temperature. I thought this could be a good start to monitor my little data center I neatly installed in a cupboard. Although I have installed an external fan so the risk of heat accumulation is quite low, the fan could fail and then head would build up.
+A couple days ago I ordered my first sensor for measuring temperature. I thought this could be a good start to monitor my little data center I neatly installed in a cupboard. Although I have installed an external fan so the risk of heat accumulation is quite low, the fan could fail and then heat would build up.
 
-The idea is to simply install a temperature sensor and constantly read it's value. If a threshold is reached, a warning should be sent.
+The idea now is to simply install a temperature sensor and constantly read it's value. If a threshold is reached, a warning should be sent.
 
 Therefore the first task was to get the temperature sensor attached and be able to read from it. The sensor I have selected is a so called 'onewire' sensor (DS1820). These are sensors using the One wire (1-wire) bus for communication[^1].
 
