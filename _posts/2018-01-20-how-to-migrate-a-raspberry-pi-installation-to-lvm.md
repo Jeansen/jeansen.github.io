@@ -141,9 +141,23 @@ do this after any APT upgrade sequence (done automatically by `unattended-upgrad
 
 To have APT rebuild initramfs after every upgrade, you'll have to put the following line in `/etc/apt/apt.con.d/30initramfs`
 
-    DPkg::Post-Invoke {"mkinitramfs -o /boot/initramfs.gz"}
+    DPkg::Post-Invoke {"mkinitramfs -o /boot/initramfs.gz `ls /lib/modules | grep '\-v7'`"}
     
+The catch here is to tell `mkinitramfs` to build for the new kernel and not the current one. This is necessary because after any kernel update the old one will be gone and `initramfs` would complain and fail because of missing folders in `/lib/modules`.
+
+To select the right version, you have to tell `mkinitramfs` which version to use. But this should be done without any user intervention, of course. But this is an easy task because `/lib/modules` should only contain two folders. One for the ARMv6 architecture and one for ARMv7. For example:
+
+    4.19.42+  
+    4.19.42-v7+
+
+You only have to select the right version. If you are not sure which CPU type your Raspberry Pi has installed, run `cat /proc/cpuinfo`. In this example I suppose you own a Raspberry Pi version 3 (any model), which uses the ARMv7 architecture.[^2]
+
+And with `ls /lib/modules | grep '\-v7'` we simply select the "-v7" version and provide this to `mkinitramfs`.
+
+### Why 30initramfs?
 You might have to change the number, but 30 in `30initramfs` should be fine. This way we make sure the `Post-Invoke` hook is present before other tools like `unattended-upgrades` which by default use 50 or greater numbers. Also note, that the name `initramfs` as part of the filename is my personal preference. Choose whatever name you like! 
+
+### What happens if I dont' care for the kernel?
 
 If you do not have initramfs rebuilt and you get a new kernel, then the new kernel will not be able to initiate LVM and
 mount your filesystems. You might see something similar to the following and be stuck in emergency mode:
@@ -152,9 +166,10 @@ mount your filesystems. You might see something similar to the following and be 
     /dev/mapper/vg00-root: open failed: Permission denied
     Failure to communicate with kernel device-mapper driver.
     Incompatible libdevmapper 1.02.145 (2017-11-03) and kernel driver (unknown version).
-    
+        
 ## All done
 
 That's it! Put this newly created SD card in your Raspberry Pi and see what will happen :-) 
     
 [^1]: After all, restoring the previous backup would overwrite your current LVM setup!
+[^2]: Actually, only version 2 Mod. B uses an ARMv7 CPU. Versions 2 Mod. B v1.2, 3 Mod. A+, 3 Mod. B and 3 Mod. B+ all use an ARMv8 CPU. But since Raspian is 32 bit, running in Aarch32 mode is the reason it acts like an ARMv7 with some missing instructions.
