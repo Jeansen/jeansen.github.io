@@ -150,7 +150,7 @@ To select the right version, you have to tell `mkinitramfs` which version to use
     4.19.42+  
     4.19.42-v7+
 
-You only have to select the right version. If you are not sure which CPU type your Raspberry Pi has installed, run `cat /proc/cpuinfo`. In this example I suppose you own a Raspberry Pi version 3 (any model), which uses the ARMv7 architecture.[^2]
+You only have to select the right version. If you are not sure which CPU type your Raspberry Pi has installed, run `cat /proc/cpuinfo`. In this example I suppose you own a Raspberry Pi version 3 (any model), which uses the ARMv7 architecture.[^1]
 
 And with `ls /lib/modules | grep '\-v7'` we simply select the "-v7" version and provide this to `mkinitramfs`.
 
@@ -171,5 +171,4 @@ mount your filesystems. You might see something similar to the following and be 
 
 That's it! Put this newly created SD card in your Raspberry Pi and see what will happen :-) 
     
-[^1]: After all, restoring the previous backup would overwrite your current LVM setup!
-[^2]: Actually, only version 2 Mod. B uses an ARMv7 CPU. Versions 2 Mod. B v1.2, 3 Mod. A+, 3 Mod. B and 3 Mod. B+ all use an ARMv8 CPU. But since Raspian is 32 bit, running in Aarch32 mode is the reason it acts like an ARMv7 with some missing instructions.
+[^1]: Actually, only version 2 Mod. B uses an ARMv7 CPU. Versions 2 Mod. B v1.2, 3 Mod. A+, 3 Mod. B and 3 Mod. B+ all use an ARMv8 CPU. But since Raspian is 32 bit, running in Aarch32 mode is the reason it acts like an ARMv7 with some missing instructions.

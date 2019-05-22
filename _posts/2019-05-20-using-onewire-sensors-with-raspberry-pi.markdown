@@ -10,11 +10,11 @@ A couple days ago I ordered my first sensor for measuring temperature. I thought
 
 The idea now is to simply install a temperature sensor and constantly read it's value. If a threshold is reached, a warning should be sent.
 
-Therefore the first task was to get the temperature sensor attached and be able to read from it. The sensor I have selected is a so called 'onewire' sensor (DS1820). These are sensors using the One wire (1-wire) bus for communication[^1].
+Therefore the first task was to get the temperature sensor attached and be able to read from it. The sensor I have selected is a so called 'onewire' sensor (DS1820). These are sensors using the One wire (1-wire) bus for communication.[^1]
 
 During my research I found a lot of different tutorials explaining how to get this sensor working. Some of them are obsolete, others simply do too much.
 
-The best source I could find was from the Raspberry Pi foundation explaining how the device tree (DT) mechanism introduced with kernel version 4.4 works[^2].
+The best source I could find was from the Raspberry Pi foundation explaining how the device tree (DT) mechanism introduced with kernel version 4.4 works.[^2]
 
 To summarize: Since kernel version 4.4 all optional devices are deactivated. There are no blacklists any longer. Most of the time, for instance with HATs (Hardware Attached on Top), required overlays will be activated automatically without any user intervention. 
 
