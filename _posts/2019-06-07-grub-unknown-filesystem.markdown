@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Grub: Unknown filesystem
+title: Grub -  Unknown filesystem
 date: 2019-06-07T11:35:10+02:00
 tags: [linux, grub, lvm]
 ---
