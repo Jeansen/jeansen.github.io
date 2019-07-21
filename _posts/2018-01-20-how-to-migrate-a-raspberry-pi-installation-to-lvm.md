@@ -145,14 +145,21 @@ To have APT rebuild initramfs after every upgrade, you'll have to put the follow
     
 The catch here is to tell `mkinitramfs` to build for the new kernel and not the current one. This is necessary because after any kernel update the old one will be gone and `initramfs` would complain and fail because of missing folders in `/lib/modules`.
 
-To select the right version, you have to tell `mkinitramfs` which version to use. But this should be done without any user intervention, of course. But this is an easy task because `/lib/modules` should only contain two folders. One for the ARMv6 architecture and one for ARMv7. For example:
+To select the right version, you have to tell `mkinitramfs` which version to use. But this should be done without any user intervention, of course. Fortunately this is an easy task because `/lib/modules` should only contain two folders. One for the ARMv6 architecture and one for ARMv7. For example:
 
     4.19.42+  
     4.19.42-v7+
 
+On the other hand it might happen that `/lib/modules` looks like this:
+  
+    4.19.57+
+    4.19.57-v7+
+    4.9.70+
+    4.9.70-v7+
+
 You only have to select the right version. If you are not sure which CPU type your Raspberry Pi has installed, run `cat /proc/cpuinfo`. In this example I suppose you own a Raspberry Pi version 3 (any model), which uses the ARMv7 architecture.[^1]
 
-And with `ls /lib/modules | grep '\-v7'` we simply select the "-v7" version and provide this to `mkinitramfs`.
+And with `ls /lib/modules | grep '\-v7' | sort | head -n 1` we simply select the latest "-v7" version and provide this to `mkinitramfs`.
 
 ### Why 30initramfs?
 You might have to change the number, but 30 in `30initramfs` should be fine. This way we make sure the `Post-Invoke` hook is present before other tools like `unattended-upgrades` which by default use 50 or greater numbers. Also note, that the name `initramfs` as part of the filename is my personal preference. Choose whatever name you like! 
