@@ -77,7 +77,7 @@ The TFT display I use has 8 connectors. Here is a table with their names, mapped
 
 Pins 2,3 and 6 will be used by SPI. Pins 1,4 and 5 will be used by the frame buffer (FB) driver. Finally, pins 7 and 8 will be used for the power supply.
 
-Make sure you connect all SPI pins to the same bus (in this example 0). If you check the GPIO layout on (https://pinout.xyz/pinout/spi)[https://pinout.xyz/pinout/spi] you will see that there are actually two SPI channels available. With the mapping above, all will be connected to SPI0.
+Make sure you connect all SPI pins to the same bus (in this example 0). If you check the GPIO layout on [https://pinout.xyz/pinout/spi](https://pinout.xyz/pinout/spi) you will see that there are actually two SPI channels available. With the mapping above, all will be connected to SPI0.
 
 When you have wired your display, you will also have to enable SPI through `raspi-config`. Then restart your system.
 
