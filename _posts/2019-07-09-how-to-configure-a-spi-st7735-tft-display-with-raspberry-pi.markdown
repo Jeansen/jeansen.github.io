@@ -65,14 +65,14 @@ The TFT display I use has 8 connectors. Here is a table with their names, mapped
 
 | ID | Pin name |  GPIO | SPI0 | FB    |
 |:---:|---------|------:|------|-------|
-|  1 | LED      |    23 |      | led   |
-|  2 | SCK      |    11 | SCLK |       |
-|  3 | SDA      |    10 | MOSI |       |
-|  4 | A0       |    24 |      | dc    |
-|  5 | RESET    |    25 |      | reset |
-|  6 | CS       |     8 | CE0  |       |
-|  7 | GND      |   GND |      |       |
-|  8 | VCC      |    5V |      |       |
+|  1 | VCC      |    5V |      |       |
+|  2 | GND      |   GND |      |       |
+|  3 | CS       |     8 | CE0  |       |
+|  4 | RESET    |    25 |      | reset |
+|  5 | A0       |    24 |      | dc    |
+|  6 | SDA      |    10 | MOSI |       |
+|  7 | SCK      |    11 | SCLK |       |
+|  8 | LED      |    23 |      | led   |
      
 
 Pins 2,3 and 6 will be used by SPI. Pins 1,4 and 5 will be used by the frame buffer (FB) driver. Finally, pins 7 and 8 will be used for the power supply.
