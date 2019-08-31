@@ -69,13 +69,15 @@ The TFT display I use has 8 connectors. Here is a table with their names, mapped
 |  2 | GND      |   GND |      |       |
 |  3 | CS       |     8 | CE0  |       |
 |  4 | RESET    |    25 |      | reset |
-|  5 | A0       |    24 |      | dc    |
+|  5 | A0 / RS  |    24 |      | dc    |
 |  6 | SDA      |    10 | MOSI |       |
 |  7 | SCK      |    11 | SCLK |       |
 |  8 | LED      |    23 |      | led   |
      
 
 Pins 2,3 and 6 will be used by SPI. Pins 1,4 and 5 will be used by the frame buffer (FB) driver. Finally, pins 7 and 8 will be used for the power supply.
+
+Note that pin 5 may have different labels. On one TFT display it was labeled as `A0`, on another it is labeled `RS`.
 
 Make sure you connect all SPI pins to the same bus (in this example 0). If you check the GPIO layout on [https://pinout.xyz/pinout/spi](https://pinout.xyz/pinout/spi) you will see that there are actually two SPI channels available. With the mapping above, all will be connected to SPI0.
 
