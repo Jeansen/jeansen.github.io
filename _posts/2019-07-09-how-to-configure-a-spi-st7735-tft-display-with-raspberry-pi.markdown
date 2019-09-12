@@ -9,7 +9,7 @@ For some time I have been playing with different sensors on the Raspbarry Pi. Wh
 
 Unfortunately the documentation is very thin and most of the setups only target Arduino. So, what follows is the result of my little journey to hook up the 1.8 TFT display with my Raspberry Pi.
 
-##Pinout
+## Pinout
 First, it might help to see what board I have. Here is what the command `pinout` gave me for my system:
 
     ,--------------------------------.
@@ -59,7 +59,7 @@ First, it might help to see what board I have. Here is what the command `pinout`
     GPIO26 (37) (38) GPIO20
        GND (39) (40) GPIO21
        
-##Wireing
+## Wireing
 The TFT display I use has 8 connectors. Here is a table with their names, mapped GPIO and some additional infos:
 
 
@@ -83,7 +83,7 @@ Make sure you connect all SPI pins to the same bus (in this example 0). If you c
 
 When you have wired your display, you will also have to enable SPI through `raspi-config`. Then restart your system.
 
-##Driver setup
+## Driver setup
 Finally you have to load the driver as a kernel module. According to the above mapping, you have to load the kernel module like this:
 
     sudo fbtft_device name=adafruit18 gpios=reset:25,dc:24,led:23
@@ -102,7 +102,7 @@ Try it out:
     
 The first number denotes the console, e.g. `tty1`. The second number denotes the frame buffer. If all works well, you should now see a login screen on your little TFT display.
 
-##Running JavaFX
+## Running JavaFX
 
 I've also tried to run a simple JavaFX application on the display with OpenJFX. Here is what I had to run:
     
