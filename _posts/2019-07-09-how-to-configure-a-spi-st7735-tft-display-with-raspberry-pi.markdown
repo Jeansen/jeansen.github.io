@@ -86,7 +86,7 @@ When you have wired your display, you will also have to enable SPI through `rasp
 ## Driver setup
 Finally you have to load the driver as a kernel module. According to the above mapping, you have to load the kernel module like this:
 
-    sudo fbtft_device name=adafruit18 gpios=reset:25,dc:24,led:23
+    sudo modprobe fbtft_device name=adafruit18 gpios=reset:25,dc:24,led:23
     
 There are a lot more parameters available to `fbtft_device`. To see all of them, run: `modinfo fbtft_device`. For additional information check [https://github.com/notro/fbtft/wiki/fbtft_device#parameters](https://github.com/notro/fbtft/wiki/fbtft_device#parameters). For instance the required`led` part in the `gpios` parameter is missing from the module description of `fbtft_device`. 
        
