@@ -75,7 +75,7 @@ The TFT display I use has 8 connectors. Here is a table with their names, mapped
 |  8 | LED      |    23 |      | led   |
      
 
-Pins 2,3 and 6 will be used by SPI. Pins 1,4 and 5 will be used by the frame buffer (FB) driver. Finally, pins 7 and 8 will be used for the power supply.
+Pins 2,3 and 6 will be used by SPI. Pins 1,4 and 5 will be used by the frame buffer (fb) driver. Finally, pins 7 and 8 will be used for the power supply.
 
 Note that pin 5 may have different labels. On one TFT display it was labeled as `A0`, on another it is labeled `RS`.
 
@@ -96,11 +96,13 @@ Now, run `dmsg` and check the last line. It should look something like this:
     
 `graphics fb1` tells you that you will have to use `/dev/fb1` to access the display.
 
-Try it out:
+If you have a Pi 3 run the following command to try it out:
 
     con2fbmap 1 1
     
 The first number denotes the console, e.g. `tty1`. The second number denotes the frame buffer. If all works well, you should now see a login screen on your little TFT display.
+
+On a Pi 4 it should automatically connect the console.
 
 ## Running JavaFX
 
@@ -109,3 +111,24 @@ I've also tried to run a simple JavaFX application on the display with OpenJFX. 
     java -Dprism.order=sw -Dmonocle.screen.fb=/dev/fb1 -jar testapp.jar
     
 Because we cannot use hardware acceleration, we have to fallback to the software rendering pipeline. JavaFX will always give precedence to hardware acceleration. And though I've explicitly specified to use `/de/fb1`, without `-Dprism.order=sw` any output would still be routed to `/dev/fb0`. So, we either have to [mirror fb0](https://github.com/notro/fbtft/wiki/Framebuffer-use#framebuffer-mirroring) or explicitly use software rendering.
+
+On the Pi 4 you can also disable the dtoverlay `vc4-fkms-v3d` in `/boot/config.txt` and drop `-Dprism.order=sw`.
+
+If you ran `con2fbmap 1 1` prior to the execution of your JavaFX application (or when using a Pi 4), you might see a blinking cursor on your display. That is because the console and your JavaFX application now share the same frame buffer. Assuming console 1 is mapped to frame buffer 1, executing the command `con2fmap 1` should display:
+
+     console 1 is mapped to framebuffer 1
+     
+To disconnect console 1 from framebuffer 1 run the following command:
+
+    echo 0 > /sys/class/vtconsole/vtcon1/bind
+    
+This should disable the console. You can verify this with `con2fmap 1` which should now display:
+
+    console 1 is mapped to framebuffer -1
+    
+More information can be found in the kernel documentation:
+- [console](https://www.kernel.org/doc/Documentation/console/console.txt)
+- [fbcon](https://www.kernel.org/doc/Documentation/fb/fbcon.txt)
+
+    
+
