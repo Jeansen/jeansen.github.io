@@ -5,14 +5,12 @@ date: 2019-10-01T17:42:37+02:00
 tags: [raspberry pi, linux]
 ---
 
-Well, it's some time now since the Raspberry Pi foundation released all new and shiny Raspbian image based on Debian Buster. Unfortunately, they do not support any upgrade path. But it is understandable they do not "support" it. This little SoC is probably to much tweaked anyways so nobody knows what users might have configured.
+Well, it's some time now since the Raspberry Pi foundation released the all new and shiny Raspbian image based on Debian Buster. Unfortunately, they do not support any upgrade path.
 
-But, for simple setups you can still try and follow the standard Debian upgrade procedures. So did I. And here is a little journey of what happened to me or better say, what I should have known before I started the distribution upgrade.
-
-So, my take away of a half-days upgrade journey with Raspian light is this:
+But, you can still try and follow the standard Debian upgrade procedures. So did I. And here is a little journey of what happened to me or rather, what I should have known before I started the distribution upgrade:
 
 - Uninstall aufs-dkms and docker. You can reinstall it afterwards, but it will simply fail to compile
-- Stop dphys-swafile service and remove /var/swap. It will be created again after a reboot
+- Stop dphys-swapfile service and remove /var/swap. It will be created again after a reboot
 
 The rest just worked like a charm. Then and when I had to make a decision if I wanted to keep or replace a configuration file, but that's about it.
 
