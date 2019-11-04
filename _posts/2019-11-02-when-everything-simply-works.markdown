@@ -2,7 +2,7 @@
 layout: post
 title: When everything simply works ...
 date: 2019-11-02T14:22:10+01:00
-tags: [linux, the real thing]
+tags: [linux, bcrm, the real thing]
 ---
 
 It's almost scary (no, not because it is Halloween time ). Today I had to clone my system because my boot partition got too small. And though I always put as much effort as possible in everything I do, I am always skeptical. Yes, I did a lot of testing, but still some doubts remained. After all, this time it was not for toying around but for real. If things went wrong, I'd be very ......... "upset"!
