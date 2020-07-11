@@ -13,13 +13,13 @@ What follows is my little journey of pain to get things to work the way I am use
 
 So, with the new system at hand I knew it would take me some time to get used to it. Unfortunately I will not have the luxury to play around for weeks and months until I am satisfied and "production ready". That said, I wanted to have an "escape plan". My idea: I clone my beloved Debian system to a virtual disk, prepare everything in Virtual Box and then put it an an external Disk. With USB 3.1 and an enclosure capable of utilizing Nvme, I would have all the performance I need without filling up the internal disk.
 
-But, I needed to be able to mount the external disk on Linux and MacOS. And that's where the hassle began. `extFat` was the obvious choice to go for regarding the file system. Unfortunately (thanks to some patent issues) it is not part of the Linux Kernel and only runs in user land. That makes it insanely slow! `HFS+` on the other hand can be used with `hfsprogs`. But you'll have to disable journalling. That is, I had to connect the external disk to my Mac Book and use 'disk util' to format it with HFS+. Afterwords I ran `diskutil disableJournal /Volumes/<name>` in the terminal and disabled journaling.
+But, I needed to be able to mount the external disk on Linux and MacOS. And that's where the hassle began. `extFat` was the obvious choice to go for regarding the file system. Unfortunately (thanks to some patent issues) it is not part of the Linux Kernel and only runs in user land. That makes it insanely slow! `HFS+` on the other hand can be used with `hfsprogs`. 
 
-If you do not disable journaling you'll be able to mount the disk, but whatever you do it will only be mounted read-only. The same is true when the disk wasn't properly unmounted. In the latter case you'll have to run `sudo fsck.hfsplus -f /dev/sdX` first.
+After formatting, make sure you unmount the partion and mount it again with the following parameters. Do not do a remount. Unmount the partition in question and mount it again!
 
-With journaling disabled and the disk properly dismounted, I was then able to mount the disk on Linux with `sudo mount -t hfsplus -o force,rw /dev/sdX /mnt/<some-name>` and copy over my virtual disk image.
+     mount -t hfsplus -o force,rw /dev/<partition> <mountpoint>
 
-Unfortunately (for reasons I could not figure out, yet) the external disk was sporadically ejected. I've tried all sorts of settings, cables, ports, adapters but nothing seemed to help. My external disk always got "spat out". Luckily I had about 500GiB available on the Mac Book's internal drive and therefore decided to copy over the virtual image to the Mac Book's drive. It's not a solution on the long run, but a workaround for the moment.
+If you do not use `-o force` you will not be able to write on the disk. In addition, you might have to run `sudo fsck.hfsplus -f /dev/<partition>` the first time.
 
 ## Virtual crash dummy
 
