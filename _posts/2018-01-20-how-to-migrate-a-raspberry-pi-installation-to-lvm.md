@@ -136,33 +136,28 @@ In the same way, we have to change `/media/root/etc/fstab` for `/`. Here is an e
     
 ## Be prepared for new kernels
 
-Finally, you'll have to make sure initramfs is rebuild whenever there are kernel updates. One options is to always 
+Finally, you'll have to make sure `initramfs` is rebuild whenever there are kernel updates. One options is to always 
 do this after any APT upgrade sequence (done automatically by `unattended-upgrades`).
 
-To have APT rebuild initramfs after every upgrade, you'll have to put the following line in `/etc/apt/apt.con.d/30initramfs`
+To have APT rebuild `initramfs` after every upgrade, you'll have to create a configuration file for APT, and a little
+ script to select the right kernel version for `initramfs`.
+ 
+Put the following in `/etc/apt/apt.con.d/30initramfs`
 
-    DPkg::Post-Invoke {"mkinitramfs -o /boot/initramfs.gz `ls /lib/modules | grep '\-v7'`"}
+    DPkg::Post-Invoke {"/usr/local/bin/update_initramfs"}
     
-The catch here is to tell `mkinitramfs` to build for the new kernel and not the current one. This is necessary because after any kernel update the old one will be gone and `initramfs` would complain and fail because of missing folders in `/lib/modules`.
+Then create the file `/usr/local/bin/update_initramfs` with the following content and make it executable:
 
-To select the right version, you have to tell `mkinitramfs` which version to use. But this should be done without any user intervention, of course. Fortunately this is an easy task because `/lib/modules` should only contain two folders. One for the ARMv6 architecture and one for ARMv7. For example:
-
-    4.19.42+  
-    4.19.42-v7+
-
-On the other hand it might happen that `/lib/modules` looks like this:
-  
-    4.19.57+
-    4.19.57-v7+
-    4.9.70+
-    4.9.70-v7+
-
-You only have to select the right version. If you are not sure which CPU type your Raspberry Pi has installed, run `cat /proc/cpuinfo`. In this example I suppose you own a Raspberry Pi version 3 (any model), which uses the ARMv7 architecture.[^1]
-
-And with `ls /lib/modules | grep '\-v7' | sort | head -n 1` we simply select the latest "-v7" version and provide this to `mkinitramfs`.
+    #!/usr/bin/env bash
+    cmd="mkinitramfs -o /boot/initramfs.gz $(ls /lib/modules | grep $(uname -r | grep -o 'v7.*') | sort -V | tail -n 1)"
+    echo "$cmd"
+    $cmd || exit 1
+    exit 0
+    
+The catch here is to tell `mkinitramfs` to build for the new kernel and not the current one. This is necessary because after any kernel update the old one will be gone and `initramfs` would complain and fail because of missing folders in `/lib/modules`. This should be done without any user intervention, of course. Fortunately this is an easy task. With `ls /lib/modules | grep $(uname -r | grep -o 'v7.*') | sort -V | tail -n 1`you can select the latest "-v7" version and provide this to `mkinitramfs`.
 
 ### Why 30initramfs?
-You might have to change the number, but 30 in `30initramfs` should be fine. This way we make sure the `Post-Invoke` hook is present before other tools like `unattended-upgrades` which by default use 50 or greater numbers. Also note, that the name `initramfs` as part of the filename is my personal preference. Choose whatever name you like! 
+You might have to change the number, but 30 in `30initramfs` should be fine. This way we make sure the `Post-Invoke` hook is present before other tools like `unattended-upgrades` which by default use 50 or greater numbers. Also, note that the name `initramfs` as part of the filename is my personal preference.
 
 ### What happens if I dont' care for the kernel?
 
@@ -177,5 +172,3 @@ mount your filesystems. You might see something similar to the following and be 
 ## All done
 
 That's it! Put this newly created SD card in your Raspberry Pi and see what will happen :-) 
-    
-[^1]: Actually, only version 2 Mod. B uses an ARMv7 CPU. Versions 2 Mod. B v1.2, 3 Mod. A+, 3 Mod. B and 3 Mod. B+ all use an ARMv8 CPU. But since Raspian is 32 bit, running in Aarch32 mode is the reason it acts like an ARMv7 with some missing instructions.
