@@ -1,15 +1,17 @@
 ---
 layout: post
-title: Upgrade elementaryOS Loki to Juno
-date: 2018-10-19T11:59:21+02:00
+title: Upgrade elementaryOS
+date: 2021-09-04T19:00:11+02:00
 tags: [linux, elementaryOS]
 ---
 
-The team behind elementaryOS released version 5.0, aka Juno. But it seems there is no official upgrade path. Everywhere I searched I was confronted with that it is not possible and I would have to do a fresh install. I was shocked. A Linux system I cannot upgrade?
+The team behind elementaryOS released their next major release. But it seems there is no official upgrade path. Everywhere I searched I was confronted with that it is not possible, and I would have to do a fresh installation. I was shocked. A Linux system I cannot upgrade?
 
-So, it is true there is [no official upgrade path, yet](https://github.com/orgs/elementary/projects/20). But as we all know Ubuntu is based on Debian which in turn __has__ a defined upgrade path. So why shouldn't the Debian upgrade path also work for all systems based on Debian?! Well, yes and no. While my experience is that it works quite well, it might not be the best way. Maybe it would be a better idea to [use aptik](https://github.com/elementary/wingpanel-indicator-notifications/issues/57#issuecomment-437696278). But, if you are still interesed, read on!
+So, it is true there is [no official upgrade path, yet](https://github.com/orgs/elementary/projects/20). But as we all know Ubuntu is based on Debian which in turn __has__ a defined upgrade path. So why shouldn't the Debian upgrade path also work for all systems based on Debian?! Well, yes and no. While my experience is that it works quite well, it might not be the best way. Maybe it would be a better idea to [use aptik](https://github.com/elementary/wingpanel-indicator-notifications/issues/57#issuecomment-437696278). But, if you are still interested, read on!
 
-All you have to do is replace every occurrence of the term `xenial` with `bionic` in `/etc/apt/resources.list` and `/ect/apt/resources.list.d`. While your are on it you might also delete all those `*.save` files.
+At this point I also want to point out, that I ran through this procedure now two times. First, when I wrote this post back in October 2018 upgrading Loki to Juno and again when upgrading Juno to Odin. Therefore, I also rewrote this article to make it more generic. You will find additional notes for an upgrade from Juno to Odin at the end of this post. 
+
+All you have to do is replace every occurrence of the term `xenial` with `bionic` in `/etc/apt/resources.list` and `/ect/apt/resources.list.d`. While you are on it, you might also delete all those `*.save` files.
 
 After that you simply do:
   
@@ -17,19 +19,19 @@ After that you simply do:
     sudo apt upgrade
     sudo apt dist-upgrade #This will also remove packages!
     
-That's it. Reboot and your are fully upgraded. Check '/ect/os-release' and prove it to yourself!
+That's it. Reboot and you are fully upgraded. Check '/ect/os-release' and prove it to yourself!
 
 
 ## Really, that's it?
 
-To be honest, I actually did a bit more. Before I upgraded the system, I installed Juno from scratch in a VM and  extracted a list of installed packages, e.g. with `dpkg --get-selections | grep -v deinstall > file_name`.
+To be honest, I actually did a bit more. Before I upgraded the system, I installed the new release from scratch in a VM and  extracted a list of installed packages, e.g. with `dpkg --get-selections | grep -v deinstall > fresh_install_list`.
 
-After I upgraded Loki I did the same and checked what packages from Juno's fresh install list were missing in the upgraded Loki installation:
+After I upgraded my current system, I did the same and checked what packages from the fresh installation were missing:
 
-    while read -r e; do package=$(echo $e | cut -d ' ' -f 1); grep -iq "$a" /path/to/loki_list || echo "$package"; done < /path/to/juno_list
+    while read -r e; do package=$(echo $e | cut -d ' ' -f 1); grep -iq "$package" /path/to/upgraded_os_list || echo "$package"; done < /path/too/fresh_install_list
     
 
-From that I got the following list:
+From that I got the following list (after upgrading from Loki to Juno):
 
     adwaita-icon-theme-full
     btrfs-progs
@@ -44,7 +46,7 @@ From that I got the following list:
     libpam-cap:amd64
     pinentry-curses
     
-Quite short, isn't it? The other packages seem to come from the previous Ubuntu base. I have not encrypted my system (cryptsetup-bin) and I do not use btrfs. I also do not use IBM's journaled file system technology (jfsutils). So I think it is save to say you can ignore the list, except for the package `io.elementary.code`. This one replaces the Scratch editor and I suggest you install it.
+Quite short, isn't it? The other packages seem to come from the previous Ubuntu base. I have not encrypted my system (cryptsetup-bin) and I do not use btrfs. I also do not use IBM's journaled file system technology (jfsutils). So I think it is safe to say you can ignore the list, except for the package `io.elementary.code`. This one replaces the Scratch editor and I suggest you install it.
 
 
 ## No Desktop Icons
@@ -70,3 +72,71 @@ Sadly, the same is true for elementaryOS. But fear not, the fix is here and very
     sed -i '/OnlyShowIn/d' ~/.config/autostart/indicator-application.desktop
     
 Reboot and enjoy!
+
+# From Juno to Odin
+
+'dist-upgrade' finished with an error, but I could fix this with `apt --fix-broken install`. A reboot worked totally fine. I then created a list of installed packages and compared it with the file from a fresh installation (see above). Here is, what I got:
+    
+    cryptsetup-bin
+    cryptsetup-initramfs
+    cryptsetup-run
+    io.elementary.initial-setup
+    jfsutils
+    libpam-cap:amd64
+    linux-image-5.11.0-27-generic
+    linux-image-generic-hwe-20.04
+    linux-modules-5.11.0-27-generic
+    linux-modules-extra-5.11.0-27-generic
+    xserver-xephyr
+
+This time, I installed everything listed and ran `sudo apt autoremove` afterwards.
+
+## Flatpak
+
+Odin removed some applications and runtimes from the system-level installation to flatpak. Unfortunately I could not figure out how to export and import the configuration. To be on the safe side, I decided to do as much as possible from scratch so configuration settings do not get mixed up! Maybe it would have sufficed to copy over the flatpak folders. Anyway, I decided against it.
+
+### Remotes
+
+First, I had to add some remotes to flatpak. This took me some time to figure out. With the command `flatpak remotes --show-details` I listed the remotes on a fresh Odin installation. Here is what I got:
+
+    Name        Title     URL                                Collection ID Subset Filter                          Priority Options         … … Homepage                         Icon
+    appcenter   AppCenter https://flatpak.elementary.io/repo -             -      -                               1        system          … … https://elementary.io/           https://flatpak.elementary.io/icon.svg
+    freedesktop Flathub   https://dl.flathub.org/repo/       -             -      /etc/flatpak/freedesktop.filter 1        system,filtered … … https://flathub.org/             https://dl.flathub.org/repo/logo.svg
+    appcenter   AppCenter https://flatpak.elementary.io/repo -             -      -                               1        user            … … https://appcenter.elementary.io/ https://flatpak.elementary.io/icon.svg
+
+From that list I could see which remotes were in use and which options applied (user, system). In addition, for one remote there was a filter set up. 
+
+On a fresh installation, the following file exists `/etc/flatpak//freedesktop.filter`. It was missing on my upgraded system. So I copied it over. In addition, this file also existed in `/var/lib/flatpak/repo/`. Therefore, I had to reference it when adding the Flathub remote for Freedesktop. Here are the commands I used to add all missing remotes on my upgraded system:
+
+    flatpak remote-add --title=Flathub --system --filter=/etc/flatpak/freedesktop.filter freedesktop https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpak remote-add --title=Appcenter --system appcenter https://flatpak.elementary.io/repo.flatpakrepo
+    flatpak remote-add --title=Appcenter --user appcenter https://flatpak.elementary.io/repo.flatpakrepo
+
+### Applications
+
+Now, with all remotes in place I was able to install the missing applications and runtimes. I created a nice one-liner that extracts all installed applications, their architecture and used branch. The output can then be fed to a simple installation loop:
+
+    flatpak list --columns=application,arch,branch | tail -n +1 | sed 's/\s\+/\//g' > /path/to/app-list
+
+After I ran the command above on a fresh Odin installation, my app-list file had the following content:
+
+    io.elementary.Platform/x86_64/6
+    io.elementary.calculator/x86_64/stable
+    io.elementary.camera/x86_64/stable
+    io.elementary.screenshot/x86_64/stable
+    org.freedesktop.Platform.GL.default/x86_64/20.08
+    org.gnome.Epiphany/x86_64/stable
+    org.gnome.Evince/x86_64/stable
+
+On my upgraded system I ran:
+
+     while read -r e; do sudo flatpak install --system --noninteractive $e; done < /path/to/app-list
+
+To be on the save side I ran the following commands on my upgraded system and the fresh Odin installation.
+
+    flatpak list --all
+    flatpak remotes --show-details
+
+If you followed along, make sure the commands output from both systems are equal.
+
+Reboot and enjoy (again)!
