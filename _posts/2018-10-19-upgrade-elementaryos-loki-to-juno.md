@@ -108,9 +108,9 @@ From that list I could see which remotes were in use and which options applied (
 
 On a fresh installation, the following file exists `/etc/flatpak//freedesktop.filter`. It was missing on my upgraded system. So I copied it over. In addition, this file also existed in `/var/lib/flatpak/repo/`. Therefore, I had to reference it when adding the Flathub remote for Freedesktop. Here are the commands I used to add all missing remotes on my upgraded system:
 
-    flatpak remote-add --title=Flathub --system --filter=/etc/flatpak/freedesktop.filter freedesktop https://dl.flathub.org/repo/flathub.flatpakrepo
-    flatpak remote-add --title=Appcenter --system appcenter https://flatpak.elementary.io/repo.flatpakrepo
-    flatpak remote-add --title=Appcenter --user appcenter https://flatpak.elementary.io/repo.flatpakrepo
+    sudo flatpak remote-add --system --filter=/etc/flatpak/freedesktop.filter freedesktop https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpak remote-add --system appcenter https://flatpak.elementary.io/repo.flatpakrepo
+    flatpak remote-add --user appcenter https://flatpak.elementary.io/repo.flatpakrepo
 
 ### Applications
 
@@ -130,7 +130,7 @@ After I ran the command above on a fresh Odin installation, my app-list file had
 
 On my upgraded system I ran:
 
-     while read -r e; do sudo flatpak install --system --noninteractive $e; done < /path/to/app-list
+     while read -r e; do sudo flatpak install --system --noninteractive $([[ ! $e =~ freedesktop ]] && echo --no-auto-pin) $e; done < /path/to/app-list
 
 To be on the save side I ran the following commands on my upgraded system and the fresh Odin installation.
 
