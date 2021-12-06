@@ -9,7 +9,7 @@ While maven works out of the box you might have to tweak scaladoc when using SBT
 
 ## SBT and scaladoc
 
-While working on my little scalafx project (which I started with Java 8 and plain JavaFX), I found that I did not get any scaladoc hints in IntelliJ.
+Working on my little scalafx project (which I started with Java 8 and plain JavaFX), I faced the problem that scaladoc hints in IntelliJ did not work.
 
 The non-scala project had something like this in its POM file:
 
