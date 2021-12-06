@@ -6,7 +6,7 @@ tags: [linux, git, lfs]
 ---
 
 
-In a [previous post]({{ site.baseurl }}{% post_url 2021-11-24-bcrm-project-update.markdown %}) I wrote about my local test setup for [bcrm](https://github.com/jeansen/bcrm).
+In a [previous post]({{ site.baseurl }}{% post_url 2021-11-24-bcrm-project-update %}) I wrote about my local test setup for [bcrm](https://github.com/jeansen/bcrm).
 Because I have a lot of different images in use during testing, I wanted to be able to have version management in place. This would allow me to play around with
 images, restore them as needed or simply jump back in time during testing.
 
@@ -61,5 +61,4 @@ There was no harm in running `git push` at this stage because `filter-repo` had 
 upstream repository (and because my instance of gitea is configured to create non-existing repositories on-the-fly), I only had to push and wait.
 
 After some time (and another cup of coffee), I finally had a new repository with all my normal git changes including a fresh start for LFS objects.
-
 
