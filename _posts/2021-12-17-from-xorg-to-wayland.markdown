@@ -43,3 +43,5 @@ some time to figure that one out or better say find it somewhere in the [comment
 
 The same is true for [autokey](https://github.com/autokey/autokey). Global shortcuts to run a command won't work. You'll have to define them via custom shortcuts 
 managed by your desktop environment, like GNOME. But application shortcuts still work as expected, as far as I can tell.
+
+test
