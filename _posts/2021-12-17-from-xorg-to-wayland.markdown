@@ -34,6 +34,8 @@ by extension, logged out and back in until I found the culprit. Actually it is a
 The reason the author of Gnome-Pie rewrote his tool from scratch was driven by the fact that it could not simply be ported to Wayland. Xorg's security concept is
 completely different to Wayland's. The latter one is more secure and more strict. The very reason why it was crated, in the first place.
 
+
+
 This also causes some tools to no longer work the same way as they did with Xorg. For instance, I use [guake](https://github.com/Guake/guake) for fly-in terminals 
 on an every-day basis. In quake, you can simply define a shortcut to bring up a terminal. That works like a charm within Xorg, but not with Wayland. As soon, as 
 a window looses focus (disappears), you can no longer bring it back with a predefined shortcut.
