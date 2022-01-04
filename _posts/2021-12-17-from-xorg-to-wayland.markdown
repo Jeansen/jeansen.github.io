@@ -7,12 +7,12 @@ tags: [linux, gnome, xorg, wayland]
 
 A quick journey history of my transition from Xorg to Wayland. I waited with this transition as long as possible because two of my favorite tools do not work on 
 Wayland. But now it seems that my favorite dock [Plank](https://github.com/ricotz/plank) is broken. And actually, [Xorg server is a mess. That's, why Wayland was
-introduces.](https://wayland.freedesktop.org/faq)
+introduced.](https://wayland.freedesktop.org/faq)
 
 So, I had to find two replacements. A natural replacement for plank was [Dash-To-Dock](https://extensions.gnome.org/extension/307/dash-to-dock/). It does not 
 have the beloved fish-eye effect, but the rest is very similar. 
 
-The other tool I use very frequently is an implementation of pie menus. Luckily, there is a Wayland project of the same author called [Fly-Pie](https://extensions.gnome.org/extension/3433/fly-pie/).
+The other tool I use frequently is an implementation of pie menus. Luckily, there is a Wayland project of the same author called [Fly-Pie](https://extensions.gnome.org/extension/3433/fly-pie/).
 But it is only available for GNOME. The native X11 application [Gnome-Pie](https://github.com/Schneegans/Gnome-Pie) primarily targets GNOME, but not exclusively.
 
 Time to switch!
@@ -21,7 +21,7 @@ Time to switch!
 
 Right! It should be a matter of seconds. Guess what? Murphy's Law punched me right in the face. First problem was, that GNOME Shell
 could not connect to X server. Problem was, I still had the legacy wrapper for Xorg installed (xserver-org-legacy). Uninstalling helped to get a connection. And 
-with Wayland I do want nor need any X server for my user session.
+with Wayland I do not want nor need any X server for my user session. And other applications for X can still be run in a nested XWayland server.
 
 ## Broken extension
 
@@ -44,4 +44,4 @@ The solution was to delete the shortcut set in guake's preferences and create a 
 some time to figure that one out or better say find it somewhere in the [comments](https://github.com/Guake/guake/issues/1642).
 
 The same is true for [autokey](https://github.com/autokey/autokey). Global shortcuts to run a command won't work. You'll have to define them via custom shortcuts 
-managed by your desktop environment, like GNOME. But application shortcuts still work as expected, as far as I can tell.
+managed by your desktop environment, like GNOME. But application shortcuts still work as expected. At least, as far as I can tell.
