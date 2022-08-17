@@ -9,7 +9,7 @@ For some days now I had to deal with postgresql in kubernetes. Dealing with it i
 
 ## The goal?
 
-Run a posgres DB, connect to it and execution some actions/
+Run a postgres DB, connect to it and execution some actions/
 
 ## The problem?
 
