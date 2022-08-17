@@ -48,6 +48,7 @@ If you do not like disabling SSL or simply don't have the luxury to disable secu
 
 Replace `<postgres-host>` with the service or pod you actually want to connect to (by name or IP).[^1]
 
+In the example above one could then connect to the ambassador pod in place of the actual postgres pod. This way a connection reset will be caught by socat and the connection will stay alive, even with SSL enabled.
 
 ## Final words
 
