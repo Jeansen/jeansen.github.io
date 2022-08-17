@@ -50,11 +50,5 @@ Replace `<postgres-host>` with the service or pod you actually want to connect t
 
 In the example above one could then connect to the ambassador pod in place of the actual postgres pod. This way a connection reset will be caught by socat and the connection will stay alive, even with SSL enabled.
 
-## Final words
-
-I love community work. It's so much fun to see something like kubernetes evolving and being able to participate, too. I did not do a PR but watching an initial problem picked up by the community to find a solution simple makes me fell "WOA!". But doing a PR myself is even more fun! ;-)
-
-So, like I mentiond before. Hopefully this PR will make its way into the 1.25 release. Until then, use the work-around above.
-
 
 [^1]: https://stackoverflow.com/questions/70762591/kubectl-port-forwarding-to-remote-postgres-port
