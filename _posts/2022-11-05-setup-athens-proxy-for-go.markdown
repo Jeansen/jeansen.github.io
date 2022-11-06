@@ -5,9 +5,9 @@ date: 2022-11-05T20:57:28+01:00
 tags: [go, raspberry pi, linux]
 ---
 
-During the automated setup of my local kubernetes cluster I decided to cache most of my requests to APT. This works in a similar fashion e.g. Artifactory, which I use to proxy Java/Kotlin dependencies.
+During the automated setup of my local Kubernetes cluster, I decided to cache most of my requests to APT. This works in a similar fashion e.g. Artifactory, which I use to proxy Java/Kotlin dependencies. I soon faced the need to do the same for GO.
 
-Now, the easiest way probably would have been to continue with Artifactory and use it for APT, GO, NPM and so on. Unfortunately, only the Maven part is free for individual applications.
+The easiest way would probably have been to continue with Artifactory and use it for APT, GO, NPM and so on. Unfortunately, only the Maven part is free for individual applications.
 
 An alternative would have been Nexus. The open-source version offers all the repository types needed, e.g. APT or GO (and more). But there are some downsides. For example, there is no .deb package available. Installations must be done by hand. Configuration is another point of critic. Compared with Artifactory, it feels cumbersome to me. And finally, it still needs Java 8! The folks behind Nexus haven't been able to port it to Java 9 and later, yet.
 
