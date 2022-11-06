@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setup athens proxy for GO
+title: Setup Athens proxy cache for GO
 date: 2022-11-05T20:57:28+01:00
 tags: [go, raspberry pi, linux]
 ---
@@ -11,7 +11,7 @@ The easiest way would probably have been to continue with Artifactory and use it
 
 An alternative would have been Nexus. The open-source version offers all the repository types needed, e.g. APT or GO (and more). But there are some downsides. For example, there is no .deb package available. Installations must be done by hand. Configuration is another point of critic. Compared with Artifactory, it feels cumbersome to me. And finally, it still needs Java 8! The folks behind Nexus haven't been able to port it to Java 9 and later, yet.
 
-Either way, Artifactory and Nexus are quite "heavy". Not something I would run on a Raspberry Pi 3. So, I found Athens. It's still in development, but exactly what I needed: Lightweight, simple setup. Only drawback here: No .deb file, either. But they provide an install script that builds Athens and installs a SystemD service, fully automated. There are some things to consider, though. What follows is a little step-by-step instruction of my journey installing Athens on a Raspberry Pi 3.
+Either way, Artifactory and Nexus are quite "heavy". Not something I would run on a Raspberry Pi 3. So, I found Athens, a specialized proxy cache for GO modules. It's still in development, but exactly what I needed: Lightweight, simple setup. Only drawback here: No .deb file, either. But they provide an install script that builds Athens and installs a SystemD service, fully automated. There are some things to consider, though. What follows is a little step-by-step instruction of my journey installing Athens on a Raspberry Pi 3.
 
 Note: In the following sections I will use  `host` and `proxy` to denote my laptop and my Raspberry Pi (which I baptized 'proxy'). In former times, `pi` was the default user on any Raspberry Pi. Nowadays when you install Raspberry Pi OS, you will be prompted to name a first user. To make things simple, I'll stick wih the user `pi`.
 
