@@ -5,7 +5,7 @@ date: 2022-12-13T01:02:57+01:00
 tags: [xterm, xrvt, urxvt, X11, xresources, linux]
 ---
 
-Bought myself a new laptop. Unfortunately, the `INSERT` key does not exist. Well, it does, but it's not a stand-alone key. Yes... it's complicated. But well, where would all the fun be if that would not be a challenge?! ;-)
+Bought myself a new laptop (TUXEDO InfinityBook Pro Gen7). Unfortunately, the `INSERT` key does not exist. Well, it does, but it's not a stand-alone key. Yes... it's complicated. But well, where would all the fun be if that would not be a challenge?! ;-)
 
 After all, I always wanted to switch some key mappings, anyway. At work, I have to use a MacBook. There, I already mapped `Shift-Backspace` for pasting clipboard contents.
 
