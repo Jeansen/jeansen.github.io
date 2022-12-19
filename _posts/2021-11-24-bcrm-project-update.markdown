@@ -5,8 +5,9 @@ date: 2021-11-24T23:48:42+01:00
 tags: [linux, bcrm, vagrant, virtualbox, kvm, libvirt]
 ---
 
+# 2021-11-24
 Because my "little" project [bcrm](https://github.com/Jeansen/bcrm) over the years grew bigger and bigger, I decided
-over a year ago to implement automated tests.
+about a year ago to implement automated tests.
 
 Challenge accepted, I thought. But how would I best implement those tests? On the one hand, the complete project is an
 overly complex shell script. On the other hand, I had to figure out a way to test the creation of a complete operating
@@ -100,4 +101,58 @@ Tests are time-consuming. Especially system tests. But either way, the investmen
 environment you might have to utilize a dozen tools for integration and automation. This can be challenging and even
 make you step back and drop the whole idea. Fortunately with private projects, it is all about fun and education. And
 looking back I can only confirm this. The journey is the reward! And there are even more journeys to come!
+
+# 2022-19-12
+One year passed since my last posting regarding [bcrm](https://github.com/Jeansen/bcrm). And I am very pleased that 
+with more and more automated test I found different bugs I would otherwise have not spotted. But writing these kind of
+system tests is - simply put - hard! But not harder than fixing some bugs.
+
+## Device and conquer
+One prominent algorithm, when it comes to sorting, is 'devide and conquer'. And one could claim I do exactly this in
+bcrm. Of course, in a very simplified way. The process of cloning can be broken down in two phases. First I collect all
+the date from the source device and sort it. Then I prepare the destination device and create the initial structure
+followed by a similar collection of all the date from the destination device, in a sorted manner. With these two lists
+I have a one-to-one mapping. Each part (folder, partition,file) from the source side is mapped to a corresponding part
+(folder, partition,file) on the destination side.
+
+So far the theory. As it turns out, getting thins ordered the right way and uniquely mapped is another discipline. When
+I started implementing bcrm, I was meant to be a simple (and small) helper script. Now, it already counts more than 3600
+LOC. It's not the most beautiful code and some parts are pure "code golf", but it does the job. But that is also on
+reason why I did not decide to use more unique mounting handlers and other data structures. So, for the moment, I rely
+on `lsblk`. But depending on the output formatting, the order also changes. Admittedly, I have not figured it out
+completely. Using raw mode (but the same columns) produces a different output than list mode. And again, the output
+changes with different selection of columns. It took me quite some time to figure it out and find a uniform and reliable
+selection.
+
+
+# All tests green
+But now, all tests are green again. And there are a lot of tests by now. Running on a dedicated Intel NUC all tests take
+about 3 days. Tests are dived in suites, stages and pure tests. For instance, there is a test suite taking a system with
+one LVM partition and the others plain. This suite runs all tests twice. One time against an EFI setup and aanother time
+against a BIOS setup. Next, there are three stages for each test. The first stage clones a running system live. The
+second stage simulates the use-case where a system is not cloned live but from a LiveCD or another system. That is, the
+system to be cloned is on an external disk or the system to be cloned was booted from a LiveCD. The third and last stage
+clones a system to virtual images. Each stage then is again composed of multiple test. One test simply clones a system.
+Another test creates a backup. Yet another test restores the backup from before. And yet another test does the same, but
+clones into virtual images, e.g. VDI or QCOW2. After that each clone is booted, selected configurations are exported
+(e.g. partition tables) and compared against assert files. 
+
+Currently, this makes about 4 suites (counted twice), 8 stages, 5 tests eacht: 4 * 2 * 8 * 5 == 320 tests. Each suite
+consumes about 8 hours. So, yes. Running all tests takes bout  64 hours or roughly 3 days. These tests only cover the
+most fundamental cloning scenarios. If I were to include all possible tests, I bet it would take a month or more for one
+complete run.
+
+
+## What's next?!
+That being said, I will add more tests, anyway. Covering 80 percent should suffice. Edge cases will be added, as needed.
+For the moment I have other "problems" to solve. I added some more ideas and the project board is still well filled for
+new versions to come. I wonder when I will raise the version to '0.2'. Next year, I definitely plan to implement
+incremental backups and refactor the code for Bash 5.0 script features.  
+
+
+
+
+
+
+
 
