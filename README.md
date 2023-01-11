@@ -141,11 +141,23 @@ Customize your site header/footer with these variables in `_config.yml`:
 
 ```yml
 header_text: Welcome to my Jekyll blog
-header_feature_image: assets/img/sample3.png
 footer_text: Copyright 2017
 ```
 
 If you don't want anything, replace the value by `" "`.
+
+#### Header's image
+
+The header's image (tested with 2480x1280) can be set as one image with `header_feature_image`
+but can also be responsive:
+
+```yml
+header_feature_image: assets/img/header/my-header-image.png
+header_feature_image_responsive: true
+```
+
+By setting `header_feature_image_responsive` to true, it will look for images 
+with suffix `-small` (620x320) and `-medium` (1240x640) to display on smaller screen.
 
 #### Localisation string
 
@@ -239,7 +251,7 @@ Enable the [mermaid-js](https://github.com/mermaid-js/mermaid) diagram rendering
 This will load and init the [mermaid.min.js](https://mermaid-js.github.io/mermaid/getting-started/n00b-gettingStarted.html#4-calling-mermaid-from-a-relative-link).
 
 ```yml
-mermaid: true # to Enable it
+mermaid: default # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
 ```
 
 Find all the help you need on the official [mermaid documentation](https://mermaid-js.github.io/mermaid/).
@@ -616,4 +628,4 @@ remote_theme: sylhare/Type-on-Strap
 This theme is licensed under the [The MIT License (MIT)](/LICENSE)
 
 - Pictures from [Pexels](https://www.pexels.com/) are under Creative Commons Zero (CC0) license
-- Fonts are licensed under the [SIL Open Font License (OFL)](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL) 
+- Fonts are licensed under the [SIL Open Font License (OFL)](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
