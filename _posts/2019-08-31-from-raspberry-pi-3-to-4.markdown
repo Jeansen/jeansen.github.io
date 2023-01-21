@@ -54,4 +54,4 @@ Another reboot, and I was ready to see what this new version 4 is capable of ;-)
 
 ## Alternative approach
 
-In my approach above I used 3 SD cards. I could have also simply used one. In that case I would have created a backup of my original SD card first (instead of cloning). Then I could have mounted the Raspian image file and simply copied over the files from the boot partition. Maybe next time I'll do exactly that one and expand this section here ;-)
+In my approach above I used 3 SD cards. I could have simply used one. In that case I would have created a backup of my original SD card first (instead of cloning). Then I could have mounted the Raspian image file and simply copied over the files from the boot partition. Maybe next time I'll do exactly that one and expand this section here ;-)
