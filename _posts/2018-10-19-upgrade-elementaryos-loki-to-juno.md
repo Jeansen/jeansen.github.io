@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Upgrade elementaryOS
-date: 2021-09-04T19:00:11+02:00
+date: 2023-03-01T19:00:11+02:00
 tags: [linux, elementaryOS]
 ---
 
@@ -140,3 +140,32 @@ To be on the save side I ran the following commands on my upgraded system and th
 If you followed along, make sure the commands output from both systems are equal.
 
 Reboot and enjoy (again)!
+
+# From Odin to Horus
+
+So, finally Elementary OS 7, aka Horus, is here! This time, upgrading the system was the easiest, compared to the other two upgrade journeys.
+
+Again, before I upgraded the system, I installed the new release from scratch in a VM and  extracted a list of installed packages, e.g. with `dpkg --get-selections | grep -v deinstall > fresh_install_list`.
+
+Then, I saved `/etc/apt/sources.list`, `/etc/apt/sources.list.d/*` and replaced these files in my Odin installation
+
+After that upgrading was as simple as:
+
+    sudo apt update
+    sudo apt upgrade
+    sudo apt dist-upgrade #This will also remove packages!
+
+Finally, I created a second list with installed packages and checked what packages from the fresh installation were missing:
+
+    while read -r e; do package=$(echo $e | cut -d ' ' -f 1); grep -iq "$package" /path/to/upgraded_os_list || echo "$package"; done < /path/too/fresh_install_list
+
+Two packages remained missing:
+
+    libllvm13:amd64
+    linux-image-generic-hwe-22.04
+
+Nothing of interest. Upgrade done! ;-)
+
+
+
+
