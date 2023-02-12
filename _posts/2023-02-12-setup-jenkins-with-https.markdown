@@ -25,7 +25,7 @@ Finally, put the file `jenkins.p12` somewhere accessible to Jenkins. I put it in
 
     sudo mv ./jenkins.p12 /var/lib/jenkins
     # I assume you run Jenkins with default settings. If you run it with a different user, you'll have to adapt the 'chown', of course!
-    sudo chown jenkins:jenkins /var/lib/jenkins/jenkins.jks
+    sudo chown jenkins:jenkins /var/lib/jenkins/jenkins.p12
 
 ### Enable HTTPS in Jenkins service
 
@@ -33,7 +33,7 @@ With a new and shiny keystore in place, tell Jenkins how to use it. Create the f
     
     [Service]
     Environment="JENKINS_HTTPS_PORT=8443"
-    Environment="JENKINS_HTTPS_KEYSTORE=/var/lib/jenkins/jenkins.jks"
+    Environment="JENKINS_HTTPS_KEYSTORE=/var/lib/jenkins/jenkins.p12"
     Environment="JENKINS_HTTPS_KEYSTORE_PASSWORD=<your-password>"
 
 Now, restart the Jenkins service.
