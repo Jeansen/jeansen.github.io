@@ -42,6 +42,8 @@ With that in place, the only thing you have to do is to call `sudo chronyc makes
 
 Looping through running VMs and executing a 'makestep' is not elegant, but not more than a on-liner. With respect to my own CLI, which I wrote to better handle my cluster, I even added it to my 'revert' call. Whenever I call `k8s cluster revert`, a 'makestep' will be executed on every node.
 
+If it does not work, you might want to play around with burst settings. But I found a simpl restart `sudo systemctl restart chrony.service` easier!
+
 ## Time Travel
 
 So, why is it actually so important to have all clocks synchronzied? Two practical examples. The first is curl. Whenever I reverted to a snapshot older than 2-3 hours (maybe even several days), some curl calls complained that x509 certificates were not yet valid. SSL handshakes simply failed because my nodes were too far behind.
