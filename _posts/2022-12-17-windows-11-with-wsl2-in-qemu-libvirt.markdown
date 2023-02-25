@@ -46,7 +46,7 @@ Simply pick the XML snippet below and try it out in `virt-manager`:
       <on_crash>destroy</on_crash>
     </domain>
 
-I stripped away the `<devices>` and some metadata. Most relevant ist the `<cpu>` tag, anyway. I kept the `<features>` but actually they are identical to those when I first generated the machine in virt-manager. You might also want to play with the CPU topology to map more or less Cores from the thost to your VM.
+I stripped away the `<devices>` and some metadata. Most relevant is the `<cpu>` tag, anyway. I kept the `<features>` but actually they are identical to those when I first generated the machine in virt-manager. You might also want to play with the CPU topology to map more or less Cores from the thost to your VM.
 
 With the settings above I successfully ran Windows 11 with active WSL2, Docker Desktop and other container stuff. I totally mapped 8 virtual CPUs which "heat up" 8 cores (from 20) on my host.
 

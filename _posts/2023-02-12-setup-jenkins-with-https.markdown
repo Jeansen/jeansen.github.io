@@ -5,7 +5,7 @@ date: 2023-02-12T23:08:22+01:00
 tags: [jenkins, https, linux]
 ---
 
-Here is a quick guid on how to set up Jenkins with HTTPS. There are numerous guides available, already. And I read some of them. But two things struck me odd. First, some guides want you to change the central systemd file for Jenkins (instead of an override file) and secondly, they want you to create a JKS file (instead of PKCS #12).
+Here is a quick guide on how to set up Jenkins with HTTPS. There are numerous guides available, already. And I read some of them. But two things struck me odd. First, some guides want you to change the central systemd file for Jenkins (instead of an override file) and secondly, they want you to create a JKS file (instead of PKCS #12).
 
 So, my words of warning: Never overwrite files in `/etc/systemd/system`. These files are manged by your system and package manager. If you want to add or change settings for Jenkins, use [/etc/systemd/system/jenkins.service.d/override.conf](https://www.jenkins.io/doc/book/system-administration/systemd-services/). JKS is a proprietary format. [PCKS #12](https://en.wikipedia.org/wiki/PKCS_12) on the other hand, is an [industry standard](https://en.wikipedia.org/wiki/PKCS) and also the default keystore format since Java 9!
 

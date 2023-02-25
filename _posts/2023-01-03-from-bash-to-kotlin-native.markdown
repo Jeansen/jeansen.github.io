@@ -31,4 +31,4 @@ Now, I have a real binary, about 3MB big, with parameter completion to utilize m
 
 ## Roadmap
 
-For now, the project is still private. It is highly customized to my private network. I'll continue to integrate more settings and configuration options. When I think the project is ready for a public aplpha release, I'll publish it. But I think this will be after I finished the [CKA](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/) exam ;-)
+For now, the project is still private. It is highly customized to my private network. I'll continue to integrate more settings and configuration options. When I think the project is ready for a public alpha release, I'll publish it. But I think this will be after I finished the [CKA](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/) exam ;-)
