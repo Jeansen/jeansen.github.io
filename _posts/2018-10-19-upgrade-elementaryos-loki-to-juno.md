@@ -164,7 +164,7 @@ Two packages remained missing:
     libllvm13:amd64
     linux-image-generic-hwe-22.04
 
-Nothing of interest. Upgrade done! ;-)
+Nothing of interest. Upgrade done!
 
 
 
