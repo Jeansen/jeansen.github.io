@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Upgrade elementaryOS
-date: 2023-03-01T19:00:11+02:00
+date: 2023-05-05T21:00:11+02:00
 tags: [linux, elementaryOS]
 ---
 
@@ -165,6 +165,10 @@ Two packages remained missing:
     linux-image-generic-hwe-22.04
 
 Nothing of interest. Upgrade done!
+
+## A note on tray icons
+
+If you run `sudo apt autoremove` it might happen that, among others, package `indicator-application` gets removed. Next time you log in, tray icons of third party applications, e.g. `owncloud` might not show. Simply install this package again, log out and back in.
 
 
 
