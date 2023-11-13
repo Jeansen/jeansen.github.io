@@ -13,7 +13,7 @@ So, my words of warning: Never overwrite files in `/etc/systemd/system`. These f
 
 First, you'll need a certificate. You can create one with openssl:
 
-     openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out jenkinns.pem
+     openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out jenkins.pem
 
 Naturally, if you already have a certificate, you do not need to create a new one. But you'll have to convert it to a PKCS #12 file.
 
